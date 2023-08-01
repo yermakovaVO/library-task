@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd"
+  logicalFilePath="db/migration/liquibase/releases/release_1.1.xml">
+
+
+  <changeSet id="UPDATE TABLE GENDER" author="v.ermakova">
+    <loadUpdateData tableName="GENDER" schemaName="LIBRARY" separator=";"
+      file="/liquibase/releases/release_1.1/csv/UPDATE TABLE GENDER.csv" primaryKey="ID">
+      <column header="ID" name="ID" type="NUMERIC"/>
+    </loadUpdateData>
+  </changeSet>
+
+  <changeSet id="UPDATE TABLE PERSON" author="v.ermakova">
+    <loadUpdateData tableName="PERSON" schemaName="LIBRARY" separator=";"
+      file="/liquibase/releases/release_1.1/csv/UPDATE TABLE PERSON.csv" primaryKey="ID">
+      <column header="ID" name="ID" type="NUMERIC"/>
+    </loadUpdateData>
+  </changeSet>
+</databaseChangeLog>

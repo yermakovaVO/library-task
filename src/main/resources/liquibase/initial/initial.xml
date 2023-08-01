@@ -1,0 +1,144 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd"
+  logicalFilePath="db/migration/liquibase/initial/initial.xml">
+
+
+  <changeSet id="JIRA-123" author="v.ermakova">
+    <comment>DDL</comment>
+
+    <sql>
+      CREATE SCHEMA IF NOT EXISTS LIBRARY;
+    </sql>
+
+    <createTable tableName="GENDER" schemaName="LIBRARY" remarks="Пол">
+      <column name="ID" type="bigint">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="GENDER" type="VARCHAR2" remarks="Пол"/>
+    </createTable>
+
+
+    <createTable tableName="PERSON" schemaName="LIBRARY" remarks="Личные данные автора" >
+      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+
+
+
+      <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="SURNAME" type="VARCHAR2" remarks="Фамилия"/>
+      <column name="NAME" type="VARCHAR2" remarks="Имя"/>
+      <column name="MIDNAME" type="VARCHAR2" remarks="Отчество"/>
+      <column name="BIRTH_DATE" type="TIMESTAMP(6)" remarks="Дата рождения"/>
+      <column name="DEATH_DATE" type="TIMESTAMP(6)" remarks="Дата рождения"/>
+      <column name="GENDER_ID" type="bigint">
+        <constraints nullable="false" foreignKeyName="FK_GENDER" references="LIBRARY.GENDER"/>
+      </column>
+    </createTable>
+
+
+    <createTable tableName="GENRE" schemaName="LIBRARY" remarks="Жанры">
+      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="NAME" type="VARCHAR2" remarks="Название жанра"/>
+    </createTable>
+
+
+    <createTable tableName="AUTHOR" schemaName="LIBRARY" remarks="Авторы книг">
+      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+
+
+      <column name="NICKNAME" type="VARCHAR2" remarks="Творческий псевдоним"/>
+      <column name="PERSON_ID" type="bigint">
+        <constraints nullable="false" foreignKeyName="FK_PERSON_LNK_AUTHOR_PERSON" references="LIBRARY.PERSON"/>
+      </column>
+
+    </createTable>
+
+
+    <createTable tableName="BOOK" schemaName="LIBRARY" remarks="Книги">
+      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="YEAR" type="DATE" remarks="Год выпуска"/>
+      <column name="NAME" type="VARCHAR2" remarks="Название книги"/>
+
+    </createTable>
+
+
+    <createTable tableName="BOOK_LNK_AUTHOR" schemaName="LIBRARY" remarks="Связочная таблица книг и авторов">
+      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="AUTHOR_ID" type="bigint">
+        <constraints nullable="false" foreignKeyName="FK_BOOK_LNK_AUTHOR_AUTHOR" references="LIBRARY.AUTHOR"/>
+      </column>
+      <column name="BOOK_ID" type="bigint">
+        <constraints nullable="false" foreignKeyName="FK_BOOK_LNK_AUTHOR_BOOK" references="LIBRARY.BOOK"/>
+      </column>
+
+    </createTable>
+
+
+    <createTable tableName="BOOK_LNK_GENRE" schemaName="LIBRARY" remarks="Связочная таблица книг и жанров">
+      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="GENRE_ID" type="bigint">
+        <constraints nullable="false" foreignKeyName="BOOK_LNK_GENRE_GENRE" references="LIBRARY.GENRE"/>
+      </column>
+      <column name="BOOK_ID" type="bigint">
+        <constraints nullable="false" foreignKeyName="BOOK_LNK_GENRE_BOOK" references="LIBRARY.BOOK"/>
+      </column>
+
+    </createTable>
+
+
+  </changeSet>
+
+
+</databaseChangeLog>
