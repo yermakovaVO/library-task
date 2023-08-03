@@ -12,13 +12,6 @@
     </loadUpdateData>
   </changeSet>
 
-  <changeSet id="UPDATE TABLE PERSON" author="v.ermakova">
-    <loadUpdateData tableName="PERSON" schemaName="LIBRARY" separator=";"
-      file="/liquibase/releases/release_1.1/csv/UPDATE TABLE PERSON.csv" primaryKey="ID">
-      <column header="ID" name="ID" type="NUMERIC"/>
-    </loadUpdateData>
-  </changeSet>
-
 
   <changeSet id="UPDATE TABLE GENRE" author="v.ermakova">
     <loadUpdateData tableName="GENRE" schemaName="LIBRARY" separator=";"
@@ -44,6 +37,13 @@
   <changeSet id="UPDATE TABLE BOOK_GENRE" author="v.ermakova">
     <loadUpdateData tableName="BOOK_GENRE" schemaName="LIBRARY" separator=";"
       file="/liquibase/releases/release_1.1/csv/UPDATE TABLE BOOK_GENRE.csv" primaryKey="ID">
+      <column header="ID" name="ID" type="NUMERIC"/>
+    </loadUpdateData>
+  </changeSet>
+
+  <changeSet id="UPDATE TABLE BOOK_AUTHOR" author="v.ermakova">
+    <loadUpdateData tableName="BOOK_AUTHOR" schemaName="LIBRARY" separator=";"
+      file="/liquibase/releases/release_1.1/csv/UPDATE TABLE BOOK_AUTHOR.csv" primaryKey="ID">
       <column header="ID" name="ID" type="NUMERIC"/>
     </loadUpdateData>
   </changeSet>
