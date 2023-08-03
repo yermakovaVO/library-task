@@ -2,13 +2,15 @@ package ru.filit.model;
 
 import jakarta.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import ru.filit.dto.BookCreateDto;
 
 @Getter
 @Setter
-public class Book extends BookCreateDto {
+@AllArgsConstructor
+public class Book  {
 
 
 	@NotEmpty
@@ -21,8 +23,6 @@ public class Book extends BookCreateDto {
 	private String authorId;
 
 
-	public Book(String name, LocalDate year) {
-		super(name, year);
-	}
+
 
 }

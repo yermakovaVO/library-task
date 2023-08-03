@@ -7,7 +7,8 @@ import ru.filit.model.Author;
 
 @Mapper
 public interface AuthorMapper {
+
 	@Select("SELECT * FROM LIBRARY.AUTHOR WHERE id = #{id}")
-	Author getArticle(@Param("id") Long id);
+	Author getAuthorById(@Param("id") Long id);
 
 }

@@ -11,6 +11,6 @@ import ru.filit.model.Author;
 @NoArgsConstructor
 public class AuthorsDto extends ListDataDto {
 
-	private List<Author> authors;
+	private List<AuthorUpdateDto> authors;
 
 }

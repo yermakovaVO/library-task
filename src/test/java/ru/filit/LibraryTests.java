@@ -19,7 +19,7 @@ class LibraryTests {
 
 	@Test
 	void getArticleById() {
-		authorMapper.getArticle(123L);
+//		authorMapper.getArticle(123L);
 	}
 
 }

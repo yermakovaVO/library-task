@@ -19,12 +19,26 @@
       <column name="GENDER" type="VARCHAR2" remarks="Пол"/>
     </createTable>
 
-
-    <createTable tableName="PERSON" schemaName="LIBRARY" remarks="Личные данные автора" >
-      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+    <createTable tableName="BOOK" schemaName="LIBRARY" remarks="Книги">
+      <column name="ID" type="bigint">
         <constraints nullable="false" primaryKey="true"/>
       </column>
+      <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
+      <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
+        <constraints nullable="false"/>
+      </column>
 
+      <column name="YEAR" type="DATE" remarks="Год выпуска"/>
+      <column name="NAME" type="VARCHAR2" remarks="Название книги"/>
+
+    </createTable>
+
+    <createTable tableName="PERSON" schemaName="LIBRARY" remarks="Личные данные автора">
+      <column name="ID" type="bigint">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
 
 
       <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
@@ -46,7 +60,7 @@
 
 
     <createTable tableName="GENRE" schemaName="LIBRARY" remarks="Жанры">
-      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+      <column name="ID" type="bigint">
         <constraints nullable="false" primaryKey="true"/>
       </column>
       <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
@@ -59,8 +73,8 @@
     </createTable>
 
 
-    <createTable tableName="AUTHOR" schemaName="LIBRARY" remarks="Авторы книг">
-      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+    <createTable tableName="AUTHOR" schemaName="LIBRARY" remarks="Связочная таблица авторства">
+      <column name="ID" type="bigint">
         <constraints nullable="false" primaryKey="true"/>
       </column>
       <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
@@ -68,9 +82,11 @@
       </column>
       <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
         <constraints nullable="false"/>
+
       </column>
-
-
+      <column name="BOOK_ID" type="bigint">
+        <constraints nullable="false" foreignKeyName="FK_BOOK_LNK_AUTHOR_BOOK" references="LIBRARY.BOOK"/>
+      </column>
       <column name="NICKNAME" type="VARCHAR2" remarks="Творческий псевдоним"/>
       <column name="PERSON_ID" type="bigint">
         <constraints nullable="false" foreignKeyName="FK_PERSON_LNK_AUTHOR_PERSON" references="LIBRARY.PERSON"/>
@@ -79,46 +95,8 @@
     </createTable>
 
 
-    <createTable tableName="BOOK" schemaName="LIBRARY" remarks="Книги">
-      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
-        <constraints nullable="false" primaryKey="true"/>
-      </column>
-      <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
-        <constraints nullable="false"/>
-      </column>
-      <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
-        <constraints nullable="false"/>
-      </column>
-
-      <column name="YEAR" type="DATE" remarks="Год выпуска"/>
-      <column name="NAME" type="VARCHAR2" remarks="Название книги"/>
-
-    </createTable>
-
-
-    <createTable tableName="BOOK_LNK_AUTHOR" schemaName="LIBRARY" remarks="Связочная таблица книг и авторов">
-      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
-        <constraints nullable="false" primaryKey="true"/>
-      </column>
-      <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
-        <constraints nullable="false"/>
-      </column>
-      <column name="UPDATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
-        <constraints nullable="false"/>
-      </column>
-
-      <column name="AUTHOR_ID" type="bigint">
-        <constraints nullable="false" foreignKeyName="FK_BOOK_LNK_AUTHOR_AUTHOR" references="LIBRARY.AUTHOR"/>
-      </column>
-      <column name="BOOK_ID" type="bigint">
-        <constraints nullable="false" foreignKeyName="FK_BOOK_LNK_AUTHOR_BOOK" references="LIBRARY.BOOK"/>
-      </column>
-
-    </createTable>
-
-
-    <createTable tableName="BOOK_LNK_GENRE" schemaName="LIBRARY" remarks="Связочная таблица книг и жанров">
-      <column name="ID" type="bigint" defaultValueComputed="GENERATED ALWAYS AS IDENTITY">
+    <createTable tableName="BOOK_GENRE" schemaName="LIBRARY" remarks="Связочная таблица книг и жанров">
+      <column name="ID" type="bigint">
         <constraints nullable="false" primaryKey="true"/>
       </column>
       <column name="CREATED_DATE" type="TIMESTAMP(6)" defaultValueComputed="current_timestamp">
@@ -135,8 +113,21 @@
         <constraints nullable="false" foreignKeyName="BOOK_LNK_GENRE_BOOK" references="LIBRARY.BOOK"/>
       </column>
 
+
     </createTable>
 
+    <addAutoIncrement columnDataType="bigint" columnName="id" incrementBy="1" startWith="1" tableName="PERSON"
+      schemaName="LIBRARY"/>
+    <addAutoIncrement columnDataType="bigint" columnName="id" incrementBy="1" startWith="1" tableName="AUTHOR"
+      schemaName="LIBRARY"/>
+    <addAutoIncrement columnDataType="bigint" columnName="id" incrementBy="1" startWith="1" tableName="BOOK"
+      schemaName="LIBRARY"/>
+    <addAutoIncrement columnDataType="bigint" columnName="id" incrementBy="1" startWith="1" tableName="GENRE"
+      schemaName="LIBRARY"/>
+    <addAutoIncrement columnDataType="bigint" columnName="id" incrementBy="1" startWith="1" tableName="BOOK_GENRE"
+      schemaName="LIBRARY"/>
+    <addAutoIncrement columnDataType="bigint" columnName="id" incrementBy="1" startWith="1" tableName="GENDER"
+      schemaName="LIBRARY"/>
 
   </changeSet>
 

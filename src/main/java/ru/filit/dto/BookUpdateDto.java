@@ -24,4 +24,16 @@ public class BookUpdateDto extends BookCreateDto {
 		this.id = id;
 	}
 
+	@Override
+	public String toString() {
+		return " BookUpdateDto{" + " id: "
+				+ this.id + " name: "
+				+ this.name + " year: "
+				+ this.year + " authorId: "
+				+ this.authorId
+				+ '}';
+
+	}
+
+
 }

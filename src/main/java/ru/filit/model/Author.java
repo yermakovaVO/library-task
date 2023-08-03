@@ -11,8 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Author {
 
-	//Не очень поняла, как в myBatis принято поступать с entity/dto, в entity видимо нет необходимости,
-// поэтому просто используем POJO, а для апи уже кастом дто?
 	@NotEmpty
 	private String id;
 

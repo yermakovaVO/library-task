@@ -18,4 +18,33 @@
       <column header="ID" name="ID" type="NUMERIC"/>
     </loadUpdateData>
   </changeSet>
+
+
+  <changeSet id="UPDATE TABLE GENRE" author="v.ermakova">
+    <loadUpdateData tableName="GENRE" schemaName="LIBRARY" separator=";"
+      file="/liquibase/releases/release_1.1/csv/UPDATE TABLE GENRE.csv" primaryKey="ID">
+      <column header="ID" name="ID" type="NUMERIC"/>
+    </loadUpdateData>
+  </changeSet>
+
+  <changeSet id="UPDATE TABLE BOOK" author="v.ermakova">
+    <loadUpdateData tableName="BOOK" schemaName="LIBRARY" separator=";"
+      file="/liquibase/releases/release_1.1/csv/UPDATE TABLE BOOK.csv" primaryKey="ID">
+      <column header="ID" name="ID" type="NUMERIC"/>
+    </loadUpdateData>
+  </changeSet>
+
+  <changeSet id="UPDATE TABLE AUTHOR" author="v.ermakova">
+    <loadUpdateData tableName="AUTHOR" schemaName="LIBRARY" separator=";"
+      file="/liquibase/releases/release_1.1/csv/UPDATE TABLE AUTHOR.csv" primaryKey="ID">
+      <column header="ID" name="ID" type="NUMERIC"/>
+    </loadUpdateData>
+  </changeSet>
+
+  <changeSet id="UPDATE TABLE BOOK_GENRE" author="v.ermakova">
+    <loadUpdateData tableName="BOOK_GENRE" schemaName="LIBRARY" separator=";"
+      file="/liquibase/releases/release_1.1/csv/UPDATE TABLE BOOK_GENRE.csv" primaryKey="ID">
+      <column header="ID" name="ID" type="NUMERIC"/>
+    </loadUpdateData>
+  </changeSet>
 </databaseChangeLog>

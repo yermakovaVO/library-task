@@ -25,6 +25,7 @@ public class GenreController {
 	@Operation(summary = "Возвращает список жанров")
 	public ResponseEntity<GenresDto> getGenres(@RequestParam(required = false) Integer offset,
 			@RequestParam(required = false) Integer limit) {
+
 		GenresDto genresDto = new GenresDto();
 		return new ResponseEntity<>(genresDto, HttpStatus.OK);
 	}
