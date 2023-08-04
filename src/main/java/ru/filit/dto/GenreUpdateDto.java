@@ -8,13 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-
 public class GenreUpdateDto extends GenreCreateDto {
 
 	@NotEmpty
 	private String id;
 
-	private String name;
 
 	public GenreUpdateDto(String name, String id) {
 		super(name);

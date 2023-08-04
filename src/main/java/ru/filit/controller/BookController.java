@@ -22,7 +22,7 @@ import ru.filit.services.BookService;
 import ru.filit.services.LoggingService;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/books")
 @RequiredArgsConstructor
 public class BookController {
 
@@ -32,7 +32,7 @@ public class BookController {
 	@Autowired
 	LoggingService loggingService;
 
-	@GetMapping("books")
+	@GetMapping("")
 	@Operation(summary = "Возвращает список книг (пагинация + жанр/автор)")
 	public ResponseEntity<BooksDto> getBooks(@RequestParam(required = false) Integer page,
 			@RequestParam(required = false) Integer size,
@@ -43,7 +43,7 @@ public class BookController {
 		return new ResponseEntity<>(bookService.getBooks(page, size, genreId, authorId), HttpStatus.OK);
 	}
 
-	@GetMapping("books/{id}")
+	@GetMapping("/{id}")
 	@Operation(summary = "Получает книгу по id")
 	public ResponseEntity<BookUpdateDto> getBookById(@PathVariable String id) {
 
@@ -51,7 +51,7 @@ public class BookController {
 		return new ResponseEntity<>(bookService.getBookById(id), HttpStatus.OK);
 	}
 
-	@PostMapping("books")
+	@PostMapping("")
 	@Operation(summary = "Создает книгу")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public void createBook(@RequestBody BookCreateDto book) {
@@ -60,7 +60,7 @@ public class BookController {
 		bookService.createBook(book);
 	}
 
-	@PutMapping("books/{id}")
+	@PutMapping("/{id}")
 	@Operation(summary = "Обновляет информацию о книге")
 	@ResponseStatus(code = HttpStatus.OK)
 	public void updateBook(@RequestBody BookUpdateDto book) {
@@ -69,7 +69,7 @@ public class BookController {
 		bookService.updateBookById(book);
 	}
 
-	@DeleteMapping("books/{id}")
+	@DeleteMapping("/{id}")
 	@Operation(summary = "Удаляет книгу")
 	@ResponseStatus(code = HttpStatus.OK)
 	public void deleteBook(@PathVariable String id) {

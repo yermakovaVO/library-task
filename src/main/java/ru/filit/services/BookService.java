@@ -23,6 +23,13 @@ public class BookService {
 	@Autowired
 	BookAuthorMapper bookAuthorMapper;
 
+	public BooksDto getBooksByAuthor(String authorId) {
+		final int max_books = 10000;
+
+		return getBooks(0, max_books, null, authorId);
+
+	}
+
 	public BooksDto getBooks(Integer page, Integer size, String genreId, String authorId) {
 		//В ТЗ один жанр и один автор
 		Long genreLongId = null;

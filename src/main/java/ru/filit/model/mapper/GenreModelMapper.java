@@ -9,6 +9,12 @@ import ru.filit.model.Genre;
 
 public class GenreModelMapper {
 
+	public static Genre updateDtoToGenre(GenreUpdateDto genreUpdateDto) {
+		return new Genre(Long.valueOf(genreUpdateDto.getId()), genreUpdateDto.getName());
+
+
+	}
+
 	public static Genre createDtoToGenre(GenreCreateDto genreCreateDto) {
 
 		return new Genre(

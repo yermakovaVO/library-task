@@ -26,9 +26,9 @@ public class AuthorService {
 	 * Отдает список книг. В случае, если выбраны offset limit - сделает пагинацию
 	 * Если выбраны genreId и/или authorId - отфильтрует по ним
 	 */
-	public AuthorsDto getAuthors(Integer offset, Integer limit, String genreId, String authorId) {
+	public AuthorsDto getAuthors(Long offset, Long limit) {
 
-		List<Author> authors = authorMapper.getAuthors();
+		List<Author> authors = authorMapper.getAuthors(offset, limit);
 		return AuthorModelMapper.authorListToAuthorsDto(authors);
 
 	}

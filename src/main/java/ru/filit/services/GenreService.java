@@ -36,8 +36,8 @@ public class GenreService {
 	}
 
 	public void updateGenreById(GenreUpdateDto dto) {
-		Long authorId = Utils.processStringInput(dto.getId());
-		genreMapper.updateGenreById(authorId);
+		Utils.processStringInput(dto.getId());
+		genreMapper.updateGenreById(GenreModelMapper.updateDtoToGenre(dto));
 	}
 
 	public void createGenre(GenreCreateDto dto) {
