@@ -34,18 +34,13 @@ public class AuthorService {
 	}
 
 
-	@Transactional //todo чек
+	@Transactional
 	public void deleteAuthorById(String id) {
-
 		Long authorId = Utils.processStringInput(id);
-		//todo getBooksByAuthor
-		//todo getBooksByAuthor
-//		bookMapper.deleteBookById();
 		authorMapper.deleteAuthorById(authorId);
 	}
 
 	public void updateAuthorById(AuthorUpdateDto dto) {
-
 		authorMapper.updateAuthorById(AuthorModelMapper.updateDtoToAuthor(dto));
 	}
 

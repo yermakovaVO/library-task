@@ -43,7 +43,7 @@ public class DataSourceConfig {
 	public SqlSessionFactory sqlSessionFactory() {
 		Environment environment = new Environment(
 				"batis",
-				new SpringManagedTransactionFactory(),// ?
+				new SpringManagedTransactionFactory(),
 				getDataSource()
 		);
 		org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration(environment);

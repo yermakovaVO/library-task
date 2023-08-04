@@ -18,8 +18,6 @@ public class AuthorCreateDto {
 
 	private String nickname;
 
-//	private String gender;
-
 	private String name;
 
 	private String surname;

@@ -38,7 +38,7 @@ public class AuthorController {
 	LoggingService loggingService;
 
 	@GetMapping("")
-	@Operation(summary = "Возвращает список авторов (пагинация)")
+	@Operation(summary = "Возвращает список авторов (+ пагинация)")
 	public ResponseEntity<AuthorsDto> getAuthors(@RequestParam(required = false) Long offset,
 			@RequestParam(required = false) Long limit) {
 		loggingService.logIncomingRequest(offset + " " + limit);

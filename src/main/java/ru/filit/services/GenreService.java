@@ -3,6 +3,7 @@ package ru.filit.services;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.filit.dto.GenreCreateDto;
 import ru.filit.dto.GenreUpdateDto;
 import ru.filit.dto.GenresDto;
@@ -30,16 +31,19 @@ public class GenreService {
 		return GenreModelMapper.genreListToGenresDto(books);
 	}
 
+	@Transactional
 	public void deleteGenreById(String id) {
 		Long authorId = Utils.processStringInput(id);
 		genreMapper.deleteGenreById(authorId);
 	}
 
+	@Transactional
 	public void updateGenreById(GenreUpdateDto dto) {
 		Utils.processStringInput(dto.getId());
 		genreMapper.updateGenreById(GenreModelMapper.updateDtoToGenre(dto));
 	}
 
+	@Transactional
 	public void createGenre(GenreCreateDto dto) {
 		genreMapper.createGenre(GenreModelMapper.createDtoToGenre(dto));
 	}
