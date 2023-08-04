@@ -11,7 +11,7 @@ import lombok.Setter;
 public class Genre {
 
 	@NotEmpty
-	private String id;
+	private Long id;
 
 	private String name;
 

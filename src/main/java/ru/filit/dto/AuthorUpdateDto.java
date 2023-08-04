@@ -1,31 +1,38 @@
 package ru.filit.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotEmpty;
-import java.time.LocalDate;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+@NoArgsConstructor
 public class AuthorUpdateDto extends AuthorCreateDto {
 
 
 	@NotEmpty
 	private String id;
 
-	private String name;
 
-	private String surname;
-
-	private String midname;
-
-	private LocalDate birthDate;
-
-
-	public AuthorUpdateDto(String name, String surname, String midname, LocalDate birthDate, String id) {
-		super(name, surname, midname, birthDate);
+	public AuthorUpdateDto(String nickname, String name, String surname, String midname, String id) {
+		super(nickname, name, surname, midname);
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return " AuthorUpdateDto{"
+				+ " id: " + this.id
+				+ " name: " + super.getName()
+				+ " surname: " + super.getSurname()
+				+ " midname: " + super.getMidname()
+				+ " nickname: " + super.getNickname()
+
+				+ '}';
+	}
+
 
 }

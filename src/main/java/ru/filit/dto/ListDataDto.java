@@ -11,10 +11,10 @@ import lombok.Setter;
 public class ListDataDto {
 
 
-	@JsonProperty("offset")
-	private int offset;
+	@JsonProperty("page")
+	private int page;
 
-	@JsonProperty("limit")
-	private int limit;
+	@JsonProperty("size")
+	private int size;
 
 }

@@ -24,6 +24,7 @@
     <liqui.version>4.23.0</liqui.version>
     <myBatisSpring.version>2.0.2</myBatisSpring.version>
     <springBootTest.version>3.1.2</springBootTest.version>
+    <springDataCommons.version>3.1.2</springDataCommons.version>
     <swagger-annotations.version>1.6.8</swagger-annotations.version>
     <springdoc-openapi-ui.version>1.7.0</springdoc-openapi-ui.version>
     <logstash.logback.version>6.4</logstash.logback.version>
@@ -31,6 +32,12 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-commons</artifactId>
+      <version>${springDataCommons.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>

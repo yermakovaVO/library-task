@@ -1,38 +1,34 @@
 package ru.filit.dto;
 
 import jakarta.validation.constraints.NotEmpty;
-import java.time.LocalDate;
+import java.util.List;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class BookUpdateDto extends BookCreateDto {
 
 	@NotEmpty
 	private String id;
 
-	private String name;
 
-	private LocalDate year;
-
-	private String authorId;
-
-
-	public BookUpdateDto(String name, LocalDate year, String id) {
-		super(name, year);
+	public BookUpdateDto(String id, String name, String year, List<Long> authors, List<Long> genres) {
+		super(				name, authors, genres, year
+		);
 		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return " BookUpdateDto{" + " id: "
-				+ this.id + " name: "
-				+ this.name + " year: "
-				+ this.year + " authorId: "
-				+ this.authorId
+		return " BookCreateDto{"
+				+ " id: " + this.id
+				+ " name: " + super.getName()
+				+ " year: " + super.getYear()
+//				+ " authors: " + getAuthors()
 				+ '}';
-
 	}
 
 

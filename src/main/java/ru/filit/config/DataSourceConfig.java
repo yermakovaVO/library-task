@@ -5,7 +5,9 @@ import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
+import org.apache.ibatis.transaction.managed.ManagedTransactionFactory;
 import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -41,7 +43,7 @@ public class DataSourceConfig {
 	public SqlSessionFactory sqlSessionFactory() {
 		Environment environment = new Environment(
 				"batis",
-				new JdbcTransactionFactory(),
+				new SpringManagedTransactionFactory(),// ?
 				getDataSource()
 		);
 		org.apache.ibatis.session.Configuration config = new org.apache.ibatis.session.Configuration(environment);

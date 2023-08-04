@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.filit.dto.BookCreateDto;
 import ru.filit.dto.BookUpdateDto;
 import ru.filit.dto.BooksDto;
-import ru.filit.model.Book;
 import ru.filit.services.BookService;
+import ru.filit.services.LoggingService;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -29,35 +29,44 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 
+	@Autowired
+	LoggingService loggingService;
+
 	@GetMapping("books")
 	@Operation(summary = "Возвращает список книг (пагинация + жанр/автор)")
-	public ResponseEntity<BooksDto> getBooks(@RequestParam(required = false) Integer offset,
-			@RequestParam(required = false) Integer limit,
+	public ResponseEntity<BooksDto> getBooks(@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) Integer size,
 			@RequestParam(required = false) String genreId,
 			@RequestParam(required = false) String authorId) {
-		BooksDto booksDto = new BooksDto();
-		return new ResponseEntity<>(booksDto, HttpStatus.OK);
+
+		loggingService.logIncomingRequest(page + " " + size + " " + genreId + " " + authorId);
+		return new ResponseEntity<>(bookService.getBooks(page, size, genreId, authorId), HttpStatus.OK);
 	}
 
 	@GetMapping("books/{id}")
 	@Operation(summary = "Получает книгу по id")
 	public ResponseEntity<BookUpdateDto> getBookById(@PathVariable String id) {
-		BookUpdateDto dto = bookService.getBookById(id);//todo
-		return new ResponseEntity<>(dto, HttpStatus.OK);
+
+		loggingService.logIncomingRequest(id);
+		return new ResponseEntity<>(bookService.getBookById(id), HttpStatus.OK);
 	}
 
 	@PostMapping("books")
 	@Operation(summary = "Создает книгу")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void createBook(@RequestBody BookCreateDto book) { //todo
+	public void createBook(@RequestBody BookCreateDto book) {
 
+		loggingService.logIncomingRequest(book.toString());
+		bookService.createBook(book);
 	}
 
 	@PutMapping("books/{id}")
 	@Operation(summary = "Обновляет информацию о книге")
 	@ResponseStatus(code = HttpStatus.OK)
-	public void updateBook(@PathVariable String id) {
+	public void updateBook(@RequestBody BookUpdateDto book) {
 
+		loggingService.logIncomingRequest(book.toString());
+		bookService.updateBookById(book);
 	}
 
 	@DeleteMapping("books/{id}")
@@ -65,6 +74,8 @@ public class BookController {
 	@ResponseStatus(code = HttpStatus.OK)
 	public void deleteBook(@PathVariable String id) {
 
+		loggingService.logIncomingRequest(id);
+		bookService.deleteBookById(id);
 	}
 
 }
