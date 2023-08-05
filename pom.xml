@@ -156,47 +156,6 @@
         </configuration>
       </plugin>
 
-      <!--      todo do i need it?-->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy-startup-files</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <delimiters>
-                <delimiter>@</delimiter>
-              </delimiters>
-              <outputDirectory>${project.build.directory}</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/resources</directory>
-                  <filtering>false</filtering>
-                  <includes>
-                    <include>application-dev.properties</include>
-                  </includes>
-                </resource>
-                <resource>
-                  <directory>src/main/docker</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-        <configuration>
-          <resources>
-            <resource>
-              <directory>src/main/resources</directory>
-              <filtering>false</filtering>
-            </resource>
-          </resources>
-        </configuration>
-      </plugin>
 
       <plugin>
         <groupId>org.springframework.boot</groupId>
