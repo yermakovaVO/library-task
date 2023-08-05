@@ -21,6 +21,9 @@ public class AuthorService {
 	@Autowired
 	BookMapper bookMapper;
 
+	@Autowired
+	AuthorDbService authorDbService;
+
 
 	/**
 	 * Отдает список книг. В случае, если выбраны offset limit - сделает пагинацию
@@ -37,7 +40,7 @@ public class AuthorService {
 	@Transactional
 	public void deleteAuthorById(String id) {
 		Long authorId = Utils.processStringInput(id);
-		authorMapper.deleteAuthorById(authorId);
+		authorDbService.deleteAuthorById(authorId);
 	}
 
 	public void updateAuthorById(AuthorUpdateDto dto) {

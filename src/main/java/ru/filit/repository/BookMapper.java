@@ -76,7 +76,7 @@ public interface BookMapper {
 			+ "         left join library.author on book_author.author_id = author.id "
 			+ " "
 			+ "where author_id = #{authorId}")
-	List<Integer> findAllBooksByAuthor(@Param("authorId") Long authorId);
+	List<Long> findAllBooksByAuthor(@Param("authorId") Long authorId);
 
 
 	@Delete("DELETE from LIBRARY.BOOK where id = #{id}")

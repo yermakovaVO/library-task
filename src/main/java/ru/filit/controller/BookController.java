@@ -40,6 +40,7 @@ public class BookController {
 			@RequestParam(required = false) String authorId) {
 
 		loggingService.logIncomingRequest(page + " " + size + " " + genreId + " " + authorId);
+
 		return new ResponseEntity<>(bookService.getBooks(page, size, genreId, authorId), HttpStatus.OK);
 	}
 

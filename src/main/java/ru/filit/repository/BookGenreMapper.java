@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 
 @Mapper
@@ -17,7 +16,7 @@ public interface BookGenreMapper {
 					+ "FROM LIBRARY.BOOK "
 					+ "         left join library.book_genre on book.id = book_genre.genre_id "
 					+ "where book_id = #{bookId}")
-	List<Integer> findAllAGenreBookLnkByBookId(@Param("bookId") Long bookId);
+	List<Long> findAllAGenreBookLnkByBookId(@Param("bookId") Long bookId);
 
 
 	@Delete("<script>" +
@@ -27,7 +26,7 @@ public interface BookGenreMapper {
 			" #{item}" +
 			"</foreach>" +
 			"</script>")
-	void deleteLnkBookGenreByIds(@Param("genreBookIds") List<Integer> genreBookIds);
+	void deleteLnkBookGenreByIds(@Param("genreBookIds") List<Long> genreBookIds);
 
 
 	@Insert("Insert into LIBRARY.book_genre (genre_id, book_id) values(#{genre_id}, #{book_id})")

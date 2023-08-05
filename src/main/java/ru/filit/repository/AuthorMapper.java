@@ -16,6 +16,10 @@ public interface AuthorMapper {
 	@Select("SELECT * FROM LIBRARY.AUTHOR WHERE id = #{id}")
 	Author getAuthorById(@Param("id") Long id);
 
+
+	@Select("select exists(select  from library.author where id = #{id})")
+	Boolean checkExists(@Param("id") Long id);
+
 	@Select("SELECT * FROM LIBRARY.AUTHOR "
 			+ "  offset #{offset} limit #{limit}")
 	List<Author> getAuthors(@Param("offset") Long offset, @Param("limit") Long limit);

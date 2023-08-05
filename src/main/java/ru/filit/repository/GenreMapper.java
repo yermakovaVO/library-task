@@ -16,7 +16,8 @@ public interface GenreMapper {
 	@Select("SELECT * FROM LIBRARY.GENRE WHERE id = #{id}")
 	Genre getGenreById(@Param("id") Long id);
 
-
+	@Select("select exists(select  from library.GENRE where id = #{id})")
+	Boolean checkExists(@Param("id") Long id);
 	@Select("SELECT * FROM LIBRARY.GENRE"
 			+ "  offset #{offset} limit #{limit}")
 	List<Genre> getGenres(@Param("offset") Integer offset, @Param("limit") Integer limit);

@@ -17,6 +17,12 @@ public class RESTTests {
 	private MockMvc mockMvc;
 
 	@Test
+	public void errorCase() throws Exception {
+		ResultActions response = mockMvc.perform(MockMvcRequestBuilders.get(
+				"/api/v1//books?page=0&size=100&genreId=999&authorId=1"));
+		response.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+	}
+
 	public void checkGetBooksEndpoint() throws Exception {
 
 		ResultActions response = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/books"));
