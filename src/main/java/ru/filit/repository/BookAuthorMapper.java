@@ -19,7 +19,7 @@ public interface BookAuthorMapper {
 			+ "where book_id = #{bookId}")
 	List<Integer> findAllAuthorBookLnkByBookId(@Param("bookId") Long bookId);
 
-	//Ужас, но такое нашлось в офишиал доке по запросу mybatis batch
+	//Ужас, но такое нашлось в офишиал доке по запросу mybatis batch, я решила оставить и обсудить )
 	@Delete("<script>" +
 			"DELETE from LIBRARY.BOOK_AUTHOR where id in " +
 			"<foreach item='item' index='index' collection='authorBookIds'" +
@@ -29,12 +29,12 @@ public interface BookAuthorMapper {
 			"</script>")
 	void deleteLnkBookAuthorByIds(@Param("authorBookIds") List<Integer> authorBookIds);
 
-	@SelectKey(statement = "SELECT MAX(id) + 1 FROM library.book_author", keyProperty = "id", resultType = Long.class, before = true)
-	@Insert("Insert into LIBRARY.book_author (id, author_id, book_id) values(#{id}, #{author_id},#{book_id})")
+	@Insert("Insert into LIBRARY.book_author (author_id, book_id) values(#{author_id},#{book_id})")
 	void createLnkBookAuthor(@Param("book_id") Long book_id, @Param("author_id") Long author_id);
 
 	@Update("Update LIBRARY.book_author set author_id = #{author_id}, book_id = #{book_id} where id=#{id}")
 	void updateLnkBookAuthor(@Param("book_id") Long book_id, @Param("author_id") Long author_id);
+
 	@Update("Update LIBRARY.book_author set author_id = #{author_id}, book_id = #{book_id} where id=#{id}")
 	void deleteLnkBookAuthor(@Param("book_id") Long book_id, @Param("author_id") Long author_id);
 

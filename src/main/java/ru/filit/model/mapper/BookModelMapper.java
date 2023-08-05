@@ -17,9 +17,8 @@ public class BookModelMapper {
 		return new Book(
 				null,
 				book.getName(),
-				LocalDate.parse(book.getYear())
+				LocalDate.parse(book.getYear()), null, null
 		);
-
 	}
 
 	public static Book updateDtoToBook(BookUpdateDto dto) {
@@ -30,14 +29,18 @@ public class BookModelMapper {
 
 
 	}
+
 	public static ru.filit.dto.BookUpdateDto bookToBookUpdateDto(Book book) {
+		List<Long> authors = new ArrayList<>();
+		book.getAuthors().forEach(author -> authors.add(author.getAuthorId()));
+		List<Long> genres = new ArrayList<>();
+		book.getGenres().forEach(author -> genres.add(author.getGenreId()));
 
 		return new BookUpdateDto(
 				book.getId().toString(),
 				book.getName(),
-				String.valueOf(book.getYear().getYear())
-				,
-				null, null
+				String.valueOf(book.getYear().getYear()),
+				authors, genres
 		);
 
 

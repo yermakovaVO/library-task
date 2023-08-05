@@ -13,19 +13,40 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 import ru.filit.model.Book;
+import ru.filit.model.BookAuthor;
+import ru.filit.model.BookGenre;
 
 @Mapper
 public interface BookMapper {
 
-	@Select("SELECT * FROM LIBRARY.BOOK WHERE id = #{id}")
-	@Results(value = {@Result(property = "personId", column = "personId"), @Result(property = "name", column = "name"),
-			@Result(property = "addresses", javaType = List.class, column = "personId", many = @Many(select = "getAddresses"))
+	@Select("SELECT book.id, book.name, book.year FROM LIBRARY.BOOK WHERE id = #{id}")
+	@Results(value = {
+			@Result(property = "id", column = "id"),
+			@Result(property = "name", column = "name"),
+			@Result(property = "year", column = "year"),
 
+			@Result(property = "authors", javaType = List.class, column = "id", many = @Many(select = "getAuthorsForBook")),
+			@Result(property = "genres", javaType = List.class, column = "id", many = @Many(select = "getGenresForBook"))
 	})
 	Book getBookById(@Param("id") Long id);
 
-	//oO в май батис нет пагинации встроенной? сделала свою
+	@Select("SELECT * FROM LIBRARY.BOOK_AUTHOR WHERE LIBRARY.BOOK_AUTHOR.book_id = #{id}")
+	@Results(value = {
+			@Result(property = "authorId", column = "author_id"),
+			@Result(property = "bookId", column = "book_id")
+	})
+	List<BookAuthor> getAuthorsForBook(Long id);
 
+
+	@Select("SELECT * FROM LIBRARY.BOOK_GENRE WHERE LIBRARY.BOOK_GENRE.book_id = #{id}")
+	@Results(value = {
+			@Result(property = "genreId", column = "genre_id"),
+			@Result(property = "bookId", column = "book_id")
+	})
+	List<BookGenre> getGenresForBook(Long id);
+
+
+	//oO в май батис нет пагинации встроенной? сделала свою
 	@Select("SELECT LIBRARY.BOOK.*"
 			+ "FROM LIBRARY.BOOK "
 			+ "         left join library.book_author on book.id = book_author.book_id "
@@ -36,6 +57,14 @@ public interface BookMapper {
 			+ "  AND (#{genreId}::bigint is null or genre.id = #{genreId})"
 			+ "  group by LIBRARY.BOOK.id"
 			+ "  offset #{offset} limit #{limit}")
+	@Results(value = {
+			@Result(property = "id", column = "id"),
+			@Result(property = "name", column = "name"),
+			@Result(property = "year", column = "year"),
+
+			@Result(property = "authors", javaType = List.class, column = "id", many = @Many(select = "getAuthorsForBook")),
+			@Result(property = "genres", javaType = List.class, column = "id", many = @Many(select = "getGenresForBook"))
+	}) //не смотрела как это выглядит в дебаге. тут точно не n+1?)
 	List<Book> getBooks(@Param("authorId") Long authorId, @Param("genreId") Long genreId,
 			@Param("offset") Long offset, @Param("limit") Long limit);
 

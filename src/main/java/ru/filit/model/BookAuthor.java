@@ -1,7 +1,5 @@
 package ru.filit.model;
 
-import jakarta.validation.constraints.NotEmpty;
-import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,19 +10,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book {
+public class BookAuthor {
 
-
-	@NotEmpty
 	private Long id;
 
-	private String name;
+	Long authorId;
 
-	private LocalDate year;
-
-	private List<BookAuthor> authors;
-
-	private List<BookGenre> genres;
+	Long bookId;
 
 
 }

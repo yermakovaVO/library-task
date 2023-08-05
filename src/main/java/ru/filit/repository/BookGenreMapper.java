@@ -30,8 +30,7 @@ public interface BookGenreMapper {
 	void deleteLnkBookGenreByIds(@Param("genreBookIds") List<Integer> genreBookIds);
 
 
-	@SelectKey(statement = "SELECT MAX(id) + 1 FROM library.book_genre", keyProperty = "id", resultType = Long.class, before = true)
-	@Insert("Insert into LIBRARY.book_genre (id, genre_id, book_id) values(#{id}, #{genre_id}, #{book_id})")
+	@Insert("Insert into LIBRARY.book_genre (genre_id, book_id) values(#{genre_id}, #{book_id})")
 	void createLnkBookGenre(@Param("book_id") Long book_id, @Param("genre_id") Long author_id);
 
 
